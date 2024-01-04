@@ -1,0 +1,37 @@
+name: NVMon Linux
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  linux-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: NVMon_src
+      
+      - name: Install Python3
+        shell: bash
+        run: sudo apt update && sudo apt install python3-pip python3-tk python3-venv
+
+      - name: Install Pyinstaller
+        shell: bash
+        run: sudo pip install pyinstaller
+
+      - name: Create VENV
+        shell: bash
+        run: python3 -m venv venv_tmp && source venv_tmp/bin/activate
+
+      - name: Create Executable
+        working-directory: ./NVMon_src/src
+        run: pyinstaller --clean --noconfirm -w -F NVMon.py
+
+      - name: Upload Executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'NVMon_linux'
+          path: ./NVMon_src/src/dist

@@ -1,0 +1,35 @@
+name: NVMon Windows
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  windows-build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: NVMon_src
+          
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Pyinstaller
+        run: pip install pyinstaller
+
+      - name: Create VENV
+        run: python3 -m venv venv_tmp && venv_tmp\scripts\activate.bat
+
+      - name: Create Executable
+        working-directory: ./NVMon_src/src
+        run: pyinstaller --clean --noconfirm -w -F NVMon.py
+
+      - name: Upload Executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'NVMon_windows'
+          path: ./NVMon_src/src/dist
