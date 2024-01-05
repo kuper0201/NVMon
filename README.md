@@ -4,7 +4,7 @@
 
 This program is a small GUI tool that monitors the health of GPUs using NVIDIA-SMI in Linux.
 
-It is written for Linux and Windows 10. but it may work with other OS.
+It is written for Linux and Windows10. but it may work with other OS.
 
 The program based on Python and tkinter, and the icon was created using Stable Diffusion.
 
