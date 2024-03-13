@@ -17,9 +17,9 @@
 |PWR|States of Power|Watt|210.00W / 250.00W|
 
 # Features
-- The window is always at the top.
-- Use less display.
-- Cross Platform.(tested with Linux and Windows10)
+- The window is always at the top
+- Use less display
+- Cross Platform(tested with Linux and Windows10)
 
 # How to install
 1. The NVIDIA-SMI is required, so the NVIDIA driver must be installed. (NVIDIA-SMI is included in NVDIA driver)
