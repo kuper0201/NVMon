@@ -2,10 +2,6 @@
 ---
 ![Python](https://img.shields.io/badge/Python3-3776AB?style=for-the-badge&logo=Python&logoColor=white)
 
-# Preview
----
-![Example of Execution](images/execute.jpg)
-
 This program is a small GUI tool that monitors the health of GPUs using NVIDIA-SMI in Linux.
 
 It is written for Linux and Windows10. but it may work with other OS.
@@ -13,6 +9,10 @@ It is written for Linux and Windows10. but it may work with other OS.
 The program based on Python and tkinter, and the icon was created using Stable Diffusion.
 
 The items provide by this program are as follows.
+
+# Preview
+---
+![Example of Execution](images/execute.jpg)
 
 |Item|Description|Unit|Example of output|
 |---|---|---|---|
