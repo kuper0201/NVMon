@@ -32,3 +32,7 @@ The items provide by this program are as follows.
 2. Download executable file in [Release Page](https://github.com/kuper0201/NVMon/releases).
 3. Unzip and execute the downloaded file.
 4. Burn your GPU and enjoy it!
+
+# To do
+---
+1. Support multiple GPUs.
