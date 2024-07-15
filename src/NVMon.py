@@ -139,11 +139,11 @@ class NVMon(Tk):
 
 def main():
     # Check NVIDIA-SMI is available
-    # try:
-    #     subprocess.run('nvidia-smi', stdout=subprocess.DEVNULL, check=True)
-    # except:
-    #     MSGBox.showerror("Error!", "Cannot found NVIDIA-SMI.\nPlease install NVIDIA driver!")
-    #     sys.exit(-1)
+    try:
+        subprocess.run('nvidia-smi', stdout=subprocess.DEVNULL, check=True)
+    except:
+        MSGBox.showerror("Error!", "Cannot found NVIDIA-SMI.\nPlease install NVIDIA driver!")
+        sys.exit(-1)
 
     nvMonitor = NVMon()
     nvMonitor.mainloop()
