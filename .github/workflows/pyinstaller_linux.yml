@@ -28,7 +28,7 @@ jobs:
 
       - name: Create Executable
         working-directory: ./NVMon_src/src
-        run: pyinstaller --clean --noconfirm -w -F NVMon.py
+        run: pyinstaller --clean --noconfirm -w -F --add-data="icons/*;icons" NVMon.py
 
       - name: Upload Executable
         uses: actions/upload-artifact@v3
