@@ -53,6 +53,8 @@ class NVMon(Tk):
         Thread(target=self.monitor, daemon=True).start()
 
     def updateData(self, name, usage, temp, memoryUsed, memoryTotal, fan, powerDraw, powerLimit):
+        name = name.replace("NVIDIA", "")
+        name = name.replace("GeFore", "")
         self.name_label['text'] = name
         self.usage_data['text'] = '{}%'.format(usage)
         self.temp_data['text'] = '{}°C'.format(temp)
@@ -68,67 +70,54 @@ class NVMon(Tk):
 
     def buildWidget(self):
         # Load Image
-        global usageImg, thermoImg, vramImg, fanImg, powerImg
-        usageImg = PhotoImage(file=self.resource_path('icons/usage.png')).subsample(7)
-        thermoImg = PhotoImage(file=self.resource_path('icons/thermo.png')).subsample(7)
-        fanImg = PhotoImage(file=self.resource_path('icons/fan.png')).subsample(7)
-        vramImg = PhotoImage(file=self.resource_path('icons/vram.png')).subsample(7)
-        powerImg = PhotoImage(file=self.resource_path('icons/bolt.png')).subsample(7)
+        global gpuImg, usageImg, thermoImg, vramImg, fanImg, powerImg, quitImg
+        gpuImg = PhotoImage(file=self.resource_path('icons/gpu.png')).subsample(6)
+        usageImg = PhotoImage(file=self.resource_path('icons/usage.png')).subsample(6)
+        thermoImg = PhotoImage(file=self.resource_path('icons/thermo.png')).subsample(6)
+        fanImg = PhotoImage(file=self.resource_path('icons/fan.png')).subsample(6)
+        vramImg = PhotoImage(file=self.resource_path('icons/vram.png')).subsample(6)
+        powerImg = PhotoImage(file=self.resource_path('icons/bolt.png')).subsample(6)
+        quitImg = PhotoImage(file=self.resource_path('icons/quit.png')).subsample(6)
 
         # Name Monitor
         name_frame = Frame(self, borderwidth=1, background=self.frame_bg_color)
-        self.name_label = Label(name_frame, text='No GPU', bg=self.bg_color, fg=self.font_color, font=self.font)
+        self.name_label = Label(name_frame, image=gpuImg, text='No GPU', bg=self.bg_color, fg=self.font_color, font=self.font, compound='left')
         self.name_label.grid(row=0, column=0)
         name_frame.grid(row=0, column=0, padx=1)
 
         # Usage Monitor
         usage_frame = Frame(self, borderwidth=1, background=self.frame_bg_color)
-        usage_label = Label(usage_frame, image=usageImg, text='Usg.', bg=self.bg_color, fg=self.font_color, font=self.font)
-        usage_label.grid(row=0, column=0)
-        
-        self.usage_data = Label(usage_frame, text='0%', bg=self.bg_color, fg=self.font_color, font=self.font)
-        self.usage_data.grid(row=0, column=1)
+        self.usage_data = Label(usage_frame, image=usageImg, text='0%', bg=self.bg_color, fg=self.font_color, font=self.font, compound='left')
+        self.usage_data.grid(row=0, column=0)
         usage_frame.grid(row=0, column=1, padx=1)
 
         # Temp Monitor
         temp_frame = Frame(self, borderwidth=1, background=self.frame_bg_color)
-        temp_label = Label(temp_frame, image=thermoImg, text='Tmp.', bg=self.bg_color, fg=self.font_color, font=self.font)
-        temp_label.grid(row=0, column=0)
-
-        self.temp_data = Label(temp_frame, text='0°C', bg=self.bg_color, fg=self.font_color, font=self.font)
-        self.temp_data.grid(row=0, column=1)
+        self.temp_data = Label(temp_frame, image=thermoImg, text='0°C', bg=self.bg_color, fg=self.font_color, font=self.font, compound='left')
+        self.temp_data.grid(row=0, column=0)
         temp_frame.grid(row=0, column=2, padx=1)
 
         # Memory Monitor
         mem_frame = Frame(self, borderwidth=1, background=self.frame_bg_color)
-        mem_label = Label(mem_frame, image=vramImg, text='VRAM.', bg=self.bg_color, fg=self.font_color, font=self.font)
-        mem_label.grid(row=0, column=0)
-
-        self.mem_data = Label(mem_frame, text='0%', bg=self.bg_color, fg=self.font_color, font=self.font)
-        self.mem_data.grid(row=0, column=1)
+        self.mem_data = Label(mem_frame, image=vramImg, text='0%', bg=self.bg_color, fg=self.font_color, font=self.font, compound='left')
+        self.mem_data.grid(row=0, column=0)
         mem_frame.grid(row=0, column=3, padx=1)
 
         # Fan Monitor
         fan_frame = Frame(self, borderwidth=1, background=self.frame_bg_color)
-        fan_label = Label(fan_frame, image=fanImg, text='FAN.', bg=self.bg_color, fg=self.font_color, font=self.font)
-        fan_label.grid(row=0, column=0)
-
-        self.fan_data = Label(fan_frame, text='0%', bg=self.bg_color, fg=self.font_color, font=self.font)
-        self.fan_data.grid(row=0, column=1)
+        self.fan_data = Label(fan_frame, image=fanImg, text='0%', bg=self.bg_color, fg=self.font_color, font=self.font, compound='left')
+        self.fan_data.grid(row=0, column=0)
         fan_frame.grid(row=0, column=4, padx=1)
 
         # Power Monitor
         power_frame = Frame(self, borderwidth=1, background=self.frame_bg_color)
-        power_label = Label(power_frame, image=powerImg, text='PWR.', bg=self.bg_color, fg=self.font_color, font=self.font)
-        power_label.grid(row=0, column=0)
-
-        self.power_data = Label(power_frame, text='0W / 0W', bg=self.bg_color, fg=self.font_color, font=self.font)
+        self.power_data = Label(power_frame, image=powerImg, text='0W / 0W', bg=self.bg_color, fg=self.font_color, font=self.font, compound='left')
         self.power_data.grid(row=0, column=1)
         power_frame.grid(row=0, column=5, padx=1)
 
         # Quit Button
         quit_frame = Frame(self, borderwidth=1, background='red')
-        self.quit_btn = Label(quit_frame, text="X", fg='red', width=2, bg=self.widget_bg_color, font=self.font)
+        self.quit_btn = Label(quit_frame, image=quitImg, text="X", fg='red', bg=self.widget_bg_color, font=self.font)
         self.quit_btn.bind("<Button-1>", lambda e:self.quitProgram())
         self.quit_btn.grid(row=0, column=0)
         quit_frame.grid(row=0, column=6)
@@ -150,11 +139,11 @@ class NVMon(Tk):
 
 def main():
     # Check NVIDIA-SMI is available
-    try:
-        subprocess.run('nvidia-smi', stdout=subprocess.DEVNULL, check=True)
-    except:
-        MSGBox.showerror("Error!", "Cannot found NVIDIA-SMI.\nPlease install NVIDIA driver!")
-        sys.exit(-1)
+    # try:
+    #     subprocess.run('nvidia-smi', stdout=subprocess.DEVNULL, check=True)
+    # except:
+    #     MSGBox.showerror("Error!", "Cannot found NVIDIA-SMI.\nPlease install NVIDIA driver!")
+    #     sys.exit(-1)
 
     nvMonitor = NVMon()
     nvMonitor.mainloop()
