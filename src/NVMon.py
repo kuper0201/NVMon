@@ -3,6 +3,7 @@ from threading import Thread
 import tkinter.messagebox as MSGBox
 import subprocess
 import sys
+import os
 
 class NVMon(Tk):
     def __init__(self, master=None):
@@ -60,14 +61,19 @@ class NVMon(Tk):
         self.power_data['text'] = '{}W / {}W'.format(powerDraw, powerLimit)
         self.update()
 
+    def resource_path(relative_path):
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)
+
     def buildWidget(self):
         # Load Image
         global usageImg, thermoImg, vramImg, fanImg, powerImg
-        usageImg = PhotoImage(file='icons/usage.png').subsample(7)
-        thermoImg = PhotoImage(file='icons/thermo.png').subsample(7)
-        fanImg = PhotoImage(file='icons/fan.png').subsample(7)
-        vramImg = PhotoImage(file='icons/vram.png').subsample(7)
-        powerImg = PhotoImage(file='icons/bolt.png').subsample(7)
+        usageImg = PhotoImage(file=resource_path('icons/usage.png')).subsample(7)
+        thermoImg = PhotoImage(file=resource_path('icons/thermo.png')).subsample(7)
+        fanImg = PhotoImage(file=resource_path('icons/fan.png')).subsample(7)
+        vramImg = PhotoImage(file=resource_path('icons/vram.png')).subsample(7)
+        powerImg = PhotoImage(file=resource_path('icons/bolt.png')).subsample(7)
 
         # Name Monitor
         name_frame = Frame(self, borderwidth=1, background=self.frame_bg_color)
