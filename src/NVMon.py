@@ -69,11 +69,11 @@ class NVMon(Tk):
     def buildWidget(self):
         # Load Image
         global usageImg, thermoImg, vramImg, fanImg, powerImg
-        usageImg = PhotoImage(file=resource_path('icons/usage.png')).subsample(7)
-        thermoImg = PhotoImage(file=resource_path('icons/thermo.png')).subsample(7)
-        fanImg = PhotoImage(file=resource_path('icons/fan.png')).subsample(7)
-        vramImg = PhotoImage(file=resource_path('icons/vram.png')).subsample(7)
-        powerImg = PhotoImage(file=resource_path('icons/bolt.png')).subsample(7)
+        usageImg = PhotoImage(file=self.resource_path('icons/usage.png')).subsample(7)
+        thermoImg = PhotoImage(file=self.resource_path('icons/thermo.png')).subsample(7)
+        fanImg = PhotoImage(file=self.resource_path('icons/fan.png')).subsample(7)
+        vramImg = PhotoImage(file=self.resource_path('icons/vram.png')).subsample(7)
+        powerImg = PhotoImage(file=self.resource_path('icons/bolt.png')).subsample(7)
 
         # Name Monitor
         name_frame = Frame(self, borderwidth=1, background=self.frame_bg_color)
