@@ -54,7 +54,7 @@ class NVMon(Tk):
 
     def updateData(self, name, usage, temp, memoryUsed, memoryTotal, fan, powerDraw, powerLimit):
         name = name.replace("NVIDIA", "")
-        name = name.replace("GeFore", "")
+        name = name.replace("GeForce", "")
         self.name_label['text'] = name
         self.usage_data['text'] = '{}%'.format(usage)
         self.temp_data['text'] = '{}°C'.format(temp)
