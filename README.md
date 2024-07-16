@@ -4,8 +4,8 @@
 > A small GUI tool that monitors the health of GPUs using NVIDIA-SMI in Linux.
 
 ## Preview
-<p align="center"><img src="images/icon_ver.png" width="350"/></p>
-<p align="center"><img src="images/text_ver.png" width="350"/></p>
+<p align="center"><img src="images/icon_ver.png" width="600"/></p>
+<p align="center"><img src="images/text_ver.png" width="600"/></p>
 
 ## Table of Units
 |Item|Description|Unit|Example of output|
