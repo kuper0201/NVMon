@@ -4,24 +4,20 @@
 > A small GUI tool that monitors the health of GPUs using NVIDIA-SMI in Linux.
 
 ## Preview
+
 <table>
-    <thead>
-        <tr>
-            <th>Icon ver</th>
-            <th>Text ver</th>
-        </tr>
-    </thead>
     <tbody>
         <tr>
-            <td>
-                <img src="images/icon_ver.png" width="600"/>
-            </td>
-            <td>
-                <img src="images/text_ver.png" width="600"/>
-            </td>
+            <th>Icon ver</th>
+            <th><img src="images/icon_ver.png" width="600"/></th>
+        </tr>
+        <tr>
+            <td>Text ver</td>
+            <td><img src="images/text_ver.png" width="600"/></td>
         </tr>
     </tbody>
 </table>
+
 
 ## Table of Units
 |Item|Description|Unit|Example of output|
