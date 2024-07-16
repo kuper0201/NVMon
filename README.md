@@ -42,6 +42,7 @@
 ## Change Log
 - ver1.1 (2024/7/16)
     - Now display items with icons instead of text.
+    
 - ver1.0 (2024/1/5)
     - First Release
 
