@@ -40,7 +40,7 @@
 4. Burn your GPU and enjoy it!
 
 ## Change Log
-- 2024.7.16.
+- ver1.1 (2024/7/16)
     - Now display items with icons instead of text.
 
 ## To do
