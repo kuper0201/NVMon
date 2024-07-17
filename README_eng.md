@@ -1,3 +1,5 @@
+[Korean version](https://github.com/kuper0201/NVMon/README.md)
+
 # NVMon
 ![Python](https://img.shields.io/badge/Python3-3776AB?style=for-the-badge&logo=Python&logoColor=white)
 
