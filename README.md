@@ -1,5 +1,5 @@
 # NVMon
-![Python](https://img.shields.io/badge/Python3-3776AB?style=for-the-badge&logo=Python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white)
 
 > A small GUI tool that monitors the health of GPUs using NVIDIA-SMI in Linux.
 
