@@ -10,7 +10,7 @@ jobs:
   windows-build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           path: NVMon_src
           
@@ -29,7 +29,7 @@ jobs:
         run: pyinstaller --clean --noconfirm -w -F --add-data="icons/*;icons" NVMon.py
 
       - name: Upload Executable
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 'NVMon_windows'
           path: ./NVMon_src/src/dist
