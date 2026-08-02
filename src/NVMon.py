@@ -199,9 +199,6 @@ class NVMon(Tk):
 
         self.rows_frame = Frame(self, background=self.bg_color)
         self.rows_frame.grid(row=0, column=0)
-        column_widths = (165, 55, 55, 155, 55, 165)
-        for column, width in enumerate(column_widths):
-            self.rows_frame.grid_columnconfigure(column, minsize=width)
 
         self.quit_frame = Frame(self, borderwidth=1, background='red')
         self.quit_btn = Label(
