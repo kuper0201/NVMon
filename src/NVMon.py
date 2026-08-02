@@ -29,7 +29,7 @@ class NVMon(Tk):
         self.frame_bg_color = '#33FF00'
         self.font_color = '#FFFFFF'
 
-        self.font = font.Font(size=10)
+        self.font = font.Font(size=9)
         self.config(bg=self.bg_color)
         self.wm_attributes("-topmost", 1)
         self._offsetx = 0
@@ -144,7 +144,9 @@ class NVMon(Tk):
 
         for index in list(self.gpu_rows):
             if index not in active_indexes:
-                self.gpu_rows.pop(index)['container'].destroy()
+                row = self.gpu_rows.pop(index)
+                for cell in row['cells']:
+                    cell.destroy()
 
         for row_number, gpu in enumerate(sorted(gpu_list, key=lambda item: item['index'])):
             index = gpu['index']
@@ -152,9 +154,10 @@ class NVMon(Tk):
                 self.createGpuRow(index)
 
             row = self.gpu_rows[index]
-            row['container'].grid(row=row_number, column=0, sticky='w')
+            for column, cell in enumerate(row['cells']):
+                cell.grid(row=row_number, column=column, padx=1, sticky='nsew')
             name = gpu['name'].replace('NVIDIA', '').replace('GeForce', '').strip()
-            row['name']['text'] = 'GPU {} {}'.format(index, name)
+            row['name']['text'] = name
             row['usage']['text'] = self.formatValue(gpu['usage'], '%')
             row['temp']['text'] = self.formatValue(gpu['temp'], '°C')
 
@@ -185,17 +188,20 @@ class NVMon(Tk):
 
     def buildWidget(self):
         self.images = {
-            'gpu': PhotoImage(file=self.resource_path('icons/gpu.png')).subsample(6),
-            'usage': PhotoImage(file=self.resource_path('icons/usage.png')).subsample(6),
-            'temp': PhotoImage(file=self.resource_path('icons/thermo.png')).subsample(6),
-            'memory': PhotoImage(file=self.resource_path('icons/vram.png')).subsample(6),
-            'fan': PhotoImage(file=self.resource_path('icons/fan.png')).subsample(6),
-            'power': PhotoImage(file=self.resource_path('icons/bolt.png')).subsample(6),
-            'quit': PhotoImage(file=self.resource_path('icons/quit.png')).subsample(6),
+            'gpu': PhotoImage(file=self.resource_path('icons/gpu.png')).subsample(7),
+            'usage': PhotoImage(file=self.resource_path('icons/usage.png')).subsample(7),
+            'temp': PhotoImage(file=self.resource_path('icons/thermo.png')).subsample(7),
+            'memory': PhotoImage(file=self.resource_path('icons/vram.png')).subsample(7),
+            'fan': PhotoImage(file=self.resource_path('icons/fan.png')).subsample(7),
+            'power': PhotoImage(file=self.resource_path('icons/bolt.png')).subsample(7),
+            'quit': PhotoImage(file=self.resource_path('icons/quit.png')).subsample(7),
         }
 
         self.rows_frame = Frame(self, background=self.bg_color)
         self.rows_frame.grid(row=0, column=0)
+        column_widths = (165, 55, 55, 155, 55, 165)
+        for column, width in enumerate(column_widths):
+            self.rows_frame.grid_columnconfigure(column, minsize=width)
 
         self.quit_frame = Frame(self, borderwidth=1, background='red')
         self.quit_btn = Label(
@@ -210,10 +216,9 @@ class NVMon(Tk):
         self.quit_frame.grid(row=0, column=1, sticky='n')
 
     def createGpuRow(self, index):
-        container = Frame(self.rows_frame, background=self.bg_color)
-        row = {'container': container}
+        row = {'cells': []}
         specs = (
-            ('name', 'gpu', 'GPU {} No GPU'.format(index)),
+            ('name', 'gpu', 'No GPU'),
             ('usage', 'usage', '0%'),
             ('temp', 'temp', '0°C'),
             ('memory', 'memory', '0G / 0G(0%)'),
@@ -222,7 +227,11 @@ class NVMon(Tk):
         )
 
         for column, (key, image_key, initial_text) in enumerate(specs):
-            frame = Frame(container, borderwidth=1, background=self.frame_bg_color)
+            frame = Frame(
+                self.rows_frame,
+                borderwidth=1,
+                background=self.frame_bg_color,
+            )
             label = Label(
                 frame,
                 image=self.images[image_key],
@@ -231,9 +240,10 @@ class NVMon(Tk):
                 fg=self.font_color,
                 font=self.font,
                 compound='left',
+                anchor='w',
             )
-            label.grid(row=0, column=0)
-            frame.grid(row=0, column=column, padx=1)
+            label.pack(fill='both', expand=True)
+            row['cells'].append(frame)
             row[key] = label
 
         self.gpu_rows[index] = row
